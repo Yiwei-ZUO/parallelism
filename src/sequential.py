@@ -1,3 +1,5 @@
+"""Sequential baseline for the word-counting experiment."""
+
 from __future__ import annotations
 from collections import Counter
 from pathlib import Path

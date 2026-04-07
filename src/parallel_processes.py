@@ -1,3 +1,5 @@
+"""Process-based implementation of the word-counting experiment."""
+
 from __future__ import annotations
 
 from collections import Counter

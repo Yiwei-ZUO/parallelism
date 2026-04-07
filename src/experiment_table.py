@@ -1,3 +1,5 @@
+"""Generate runtime comparison tables and optional profiling output."""
+
 from __future__ import annotations
 
 import argparse

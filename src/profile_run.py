@@ -1,3 +1,5 @@
+"""Profile the sequential baseline and print the most expensive functions."""
+
 from __future__ import annotations
 
 import argparse

@@ -1,3 +1,5 @@
+"""Shared utilities for text preprocessing and word-count merging."""
+
 from __future__ import annotations
 
 from collections import Counter

@@ -1,3 +1,5 @@
+"""Run one implementation and display timing and top-word results."""
+
 from __future__ import annotations
 
 import argparse

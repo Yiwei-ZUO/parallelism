@@ -1,3 +1,5 @@
+"""Small benchmarking helpers for repeated runtime measurements."""
+
 from __future__ import annotations
 
 import statistics
