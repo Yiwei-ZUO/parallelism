@@ -3,7 +3,8 @@
 This project counts word frequencies in a corpus of text files and compares three
 approaches: a sequential version, a thread-based version, and a process-based version.
 Its purpose is to measure runtime, identify bottlenecks, and see when parallel execution
-is actually beneficial.
+is actually beneficial. The project also includes a small task-granularity experiment to
+examine how the size of the work units affects process-based performance.
 
 ## Corpus
 
@@ -22,6 +23,8 @@ files.
 - `src/experiment_table.py`: generate runtime comparison tables and optional profiling
   output.
 - `src/profile_run.py`: run profiling separately for the sequential version.
+- `src/granularity_experiment.py`: compare different chunk sizes for the process-based
+  implementation.
 
 ## Quick Start
 
@@ -54,6 +57,22 @@ This command compares all three implementations on three corpus sizes, repeats e
 runtime measurement three times, appends profiling results for the sequential version on
 the largest input size, and saves the outputs in both text and Markdown formats.
 
+In the main implementation, each file is treated as one independent task.
+
+Run the additional granularity experiment:
+
+```bash
+python3 src/granularity_experiment.py \
+  --limit 50 \
+  --workers 4 \
+  --repeats 3 \
+  --chunk-sizes 1 2 5 10 25 \
+  --output results/granularity_experiment
+```
+
+This command tests the process-based version on 50 files with different chunk sizes,
+where chunk size is measured in files per task.
+
 Optional separate profiling command:
 
 ```bash
@@ -73,6 +92,20 @@ The full experiment command writes:
 The optional profiling command writes:
 
 - `results/profile_limit50.txt`: profiling output for the sequential version
+
+The granularity experiment writes:
+
+- `results/granularity_experiment.txt`: aligned plain-text chunk-size comparison table
+- `results/granularity_experiment.md`: Markdown version of the same results
+
+## Granularity Result
+
+In the supplementary granularity experiment on 50 files with 4 workers, the best result
+was obtained with chunk size 5, with a mean runtime of 0.8353 s. Chunk sizes 1 and 2
+were very close (0.8704 s and 0.8708 s), while larger chunk sizes were clearly slower:
+1.0718 s for chunk size 10 and 1.3737 s for chunk size 25. This suggests that a medium
+task size provides the best compromise between worker utilisation and management
+overhead.
 
 ## Notes
 
