@@ -6,7 +6,7 @@ from collections import Counter
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
-from text_processing import count_file, list_books, merge_counts
+from utils import count_file, list_books, merge_counts
 
 
 def _count_file_worker(path_str: str) -> Counter[str]:
